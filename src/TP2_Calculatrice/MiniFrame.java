@@ -1,9 +1,8 @@
 package TP2_Calculatrice;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,8 +10,8 @@ import javax.swing.*;
 
 public class MiniFrame extends JFrame
 {
-	private final List<JButton> buttonList;
-	private static final int N = 4;
+//	private final List<JButton> buttonList;
+//	private static final int N = 4;
 	JTextField textField;
 	
 //	private JButton getGridButton(int r, int c) 
@@ -48,7 +47,7 @@ public class MiniFrame extends JFrame
 //		Add it to frame
 		this.add(textField);
 //		Buttons -----------------------------------------------
-		buttonList = new ArrayList<JButton>();
+//		buttonList = new ArrayList<JButton>();
 		
 		
 		this.setSize(300,300);
