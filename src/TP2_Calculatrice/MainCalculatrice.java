@@ -1,6 +1,6 @@
 package TP2_Calculatrice;
 
-public class Calculatrice 
+public class MainCalculatrice 
 {
 	public static void main(String[] args) 
 	{
