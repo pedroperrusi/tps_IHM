@@ -8,7 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class FrameCalculatrice extends JFrame implements ActionListener {
+public class FrameCalculatrice extends JFrame {
+	Calculatrice calculatrice;
 	JButton buttons[] ;
     JButton operators[];
     JButton eq;
@@ -23,29 +24,30 @@ public class FrameCalculatrice extends JFrame implements ActionListener {
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
+        calculatrice = new Calculatrice();
          
         tf = new JTextField(10);
         add(tf);
          
         clr = new JButton("CLR");
-        addButton(clr);
+        addOperation(clr);
          
         buttons = new JButton[11];
         for (int i = 0; i<buttons.length-1; i++){
             buttons[i] = new JButton(i+"");
-            addButton(buttons[i]);
+            addNumber(buttons[i]);
         }
         buttons[buttons.length-1]=new JButton(".");
-        addButton(buttons[buttons.length-1]);
+        addNumber(buttons[buttons.length-1]);
          
         operators = new JButton[OPS.length];
         for (int i = 0; i<operators.length; i++){
             operators[i] = new JButton(OPS[i]);
-            addButton(operators[i]);
+            addOperation(operators[i]);
         }
          
         eq = new JButton("=");
-        addButton(eq);
+        addOperation(eq);
              
         setSize(220,200);
         setVisible(true);
@@ -53,18 +55,54 @@ public class FrameCalculatrice extends JFrame implements ActionListener {
     }
     
     // simple function to remember calling actionListener
-    public void addButton(JButton button) 
+    public void addNumber(JButton button) 
     {
-    	button.addActionListener(this);
+    	// define reaction to each button
+    	button.addActionListener(new ActionListener()
+    							{
+    								public void actionPerformed(ActionEvent e) 
+    								{
+						    		// get string command of the button pressed
+						        	String command = e.getActionCommand();
+						        	// Simply concatenate string to text area
+						        	tf.setText(tf.getText() + command);
+    								}
+    							});
     	this.add(button);
     }
     
-    /// When a button is pressed...
-    public void actionPerformed(ActionEvent e)
+    public void addOperation(JButton button) 
     {
-    	// get string command of the button pressed
-    	String command = e.getActionCommand();
-    	// series of conditionals to determine the operation type
-    	tf.setText(tf.getText() + command);
+    	// Annonyme class to process operation
+    	button.addActionListener(
+    			new ActionListener()
+    			{
+					public void actionPerformed(ActionEvent e) 
+					{
+						// get string command of the button pressed
+				    	String command = e.getActionCommand();
+				    	// If command is an operation (+, -, x, /)
+				    	if((command == "+")||(command == "-")||(command == "x")||(command == "/")) 
+				    	{
+				    		// pass the text value to the calculator as first operand
+				    		calculatrice.setOperand(Float.parseFloat(tf.getText()));
+				    		// pass the operation type
+				    		calculatrice.setOperation(command);
+				    		// clean text area
+				    		tf.setText("");
+				    	}
+				    	else if(command == "CLR") 
+				    	{
+				    		calculatrice.clear();
+				    		tf.setText("");
+				    	} else if(command == "=") 
+				    	{
+				    		float result = calculatrice.getResult(Float.parseFloat(tf.getText()));
+				    		tf.setText(Float.toString(result));
+				    	}
+					}
+    			});
+    	this.add(button);
     }
+    
 }
