@@ -6,5 +6,4 @@ public class MainCalculatrice
 	{
 		FrameCalculatrice frame = new FrameCalculatrice("Calculatrice");
 	}
-	
 }

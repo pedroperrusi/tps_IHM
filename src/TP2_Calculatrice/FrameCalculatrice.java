@@ -91,7 +91,10 @@ public class FrameCalculatrice extends JFrame {
 				    		{
 				    			calculatrice.setOperand(Float.parseFloat(accumStr));
 				    		}
-				    		catch(NumberFormatException ex) {calculatrice.setOperand(0);}
+				    		catch(NumberFormatException ex) 
+				    		{
+				    			calculatrice.setOperand(0);
+				    		}
 				    		// pass the operation type
 				    		calculatrice.setOperation(command);
 				    		// clean text area
