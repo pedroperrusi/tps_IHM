@@ -54,6 +54,25 @@ public class FrameCalculatrice extends JFrame {
         setResizable(false);
     }
     
+    public float getFloatFromText() 
+    {
+    	// Function which handles exceptions on parsing values from the text box
+		float value = 0;
+    	String accumStr = tf.getText();
+		try 
+		{
+			value = Float.parseFloat(accumStr);
+			// clean text area
+    		tf.setText("");
+		}
+		catch(NumberFormatException ex) 
+		{
+			tf.setText("Error: Invalid user entry");
+		}
+		return value;
+    } 
+    
+    /* User interfaces Callbacks */
     // simple function to remember calling actionListener
     public void addNumber(JButton button) 
     {
@@ -74,7 +93,7 @@ public class FrameCalculatrice extends JFrame {
     
     public void addOperation(JButton button) 
     {
-    	// Annonyme class to process operation
+    	// Anonyme class to process operation
     	button.addActionListener(
     			new ActionListener()
     			{
@@ -86,19 +105,9 @@ public class FrameCalculatrice extends JFrame {
 				    	if((command == "+")||(command == "-")||(command == "x")||(command == "/")) 
 				    	{
 				    		// pass the text value to the calculator as first operand
-				    		String accumStr = tf.getText();
-				    		try 
-				    		{
-				    			calculatrice.setOperand(Float.parseFloat(accumStr));
-				    		}
-				    		catch(NumberFormatException ex) 
-				    		{
-				    			calculatrice.setOperand(0);
-				    		}
+				    		calculatrice.setOperand(getFloatFromText());
 				    		// pass the operation type
 				    		calculatrice.setOperation(command);
-				    		// clean text area
-				    		tf.setText("");
 				    	}
 				    	else if(command == "CLR") 
 				    	{
@@ -106,8 +115,14 @@ public class FrameCalculatrice extends JFrame {
 				    		tf.setText("");
 				    	} else if(command == "=") 
 				    	{
-				    		float result = calculatrice.getResult(Float.parseFloat(tf.getText()));
-				    		tf.setText(Float.toString(result));
+				    		try 
+				    		{
+				    			float result = calculatrice.getResult(getFloatFromText());
+				    			tf.setText(Float.toString(result));
+				    		} catch(Calculatrice.InvalidUserEntry except) 
+				    		{
+				    			tf.setText(except.getMessage());
+				    		}
 				    	}
 					}
     			});

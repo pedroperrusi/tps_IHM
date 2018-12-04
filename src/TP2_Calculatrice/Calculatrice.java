@@ -1,9 +1,9 @@
 package TP2_Calculatrice;
 
 /* Clean Calcuatrice class to handle math operations */
-public class Calculatrice 
+public class Calculatrice
 {
-	// Parametres
+	// Parameters
 	float accum; // saved value in the calculator
 	String operation; // string which represents the operation
 	
@@ -28,7 +28,15 @@ public class Calculatrice
 		this.operation = ops;
 	}
 	
-	public float getResult(float secondOperand) 
+	public float division(float firstOp, float secondOp) throws InvalidUserEntry
+	{
+		if (secondOp == 0) throw new InvalidUserEntry("Division par zero!");
+		float div = firstOp/secondOp;
+		
+		return div;
+	}
+	
+	public float getResult(float secondOperand) throws InvalidUserEntry
 	{
 		// if operation was not defined, return accum
 		if (operation == "+")
@@ -38,8 +46,30 @@ public class Calculatrice
 		else if (operation == "x")
 			return accum * secondOperand;
 		else if (operation == "/")
-			return accum / secondOperand;
+		{
+			try
+			{
+				return division(accum, secondOperand);
+			}
+			catch(InvalidUserEntry e) 
+			{
+				throw e;
+			}
+		}
 		else
 			return accum;
+	}
+	
+	public class InvalidUserEntry extends Exception
+	{
+		InvalidUserEntry()
+		{
+			super();
+		}
+		
+		InvalidUserEntry(String errorMsg)
+		{
+			super(errorMsg);
+		}
 	}
 }
