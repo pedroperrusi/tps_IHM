@@ -58,16 +58,17 @@ public class FrameCalculatrice extends JFrame {
     public void addNumber(JButton button) 
     {
     	// define reaction to each button
-    	button.addActionListener(new ActionListener()
-    							{
-    								public void actionPerformed(ActionEvent e) 
-    								{
-						    		// get string command of the button pressed
-						        	String command = e.getActionCommand();
-						        	// Simply concatenate string to text area
-						        	tf.setText(tf.getText() + command);
-    								}
-    							});
+    	button.addActionListener(
+    			new ActionListener()
+					{
+						public void actionPerformed(ActionEvent e) 
+						{
+				    		// get string command of the button pressed
+				        	String command = e.getActionCommand();
+				        	// Simply concatenate string to text area
+				        	tf.setText(tf.getText() + command);
+						}
+					});
     	this.add(button);
     }
     
@@ -85,7 +86,12 @@ public class FrameCalculatrice extends JFrame {
 				    	if((command == "+")||(command == "-")||(command == "x")||(command == "/")) 
 				    	{
 				    		// pass the text value to the calculator as first operand
-				    		calculatrice.setOperand(Float.parseFloat(tf.getText()));
+				    		String accumStr = tf.getText();
+				    		try 
+				    		{
+				    			calculatrice.setOperand(Float.parseFloat(accumStr));
+				    		}
+				    		catch(NumberFormatException ex) {calculatrice.setOperand(0);}
 				    		// pass the operation type
 				    		calculatrice.setOperation(command);
 				    		// clean text area
