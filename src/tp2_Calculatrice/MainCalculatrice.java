@@ -1,4 +1,4 @@
-package TP2_Calculatrice;
+package tp2_Calculatrice;
 
 public class MainCalculatrice 
 {

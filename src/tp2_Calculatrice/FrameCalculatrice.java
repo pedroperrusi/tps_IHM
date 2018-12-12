@@ -1,4 +1,4 @@
-package TP2_Calculatrice;
+package tp2_Calculatrice;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -49,7 +49,7 @@ public class FrameCalculatrice extends JFrame {
         eq = new JButton("=");
         addOperation(eq);
              
-        setSize(220,200);
+        setSize(420,400);
         setVisible(true);
         setResizable(false);
     }

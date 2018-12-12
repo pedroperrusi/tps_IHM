@@ -1,4 +1,4 @@
-package TP1_UnPetitSwig;
+package tp1_UnPetitSwig;
 
 import java.util.Calendar;
 import java.util.StringTokenizer;
