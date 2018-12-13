@@ -7,8 +7,6 @@ package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
 
-import CI1_Editeur_Graphique2D.src.Forme2D.WrongSizeException;
-
 // TODO: Auto-generated Javadoc
 /**
  *  Squere geometry object (French).
