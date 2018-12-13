@@ -1,22 +1,54 @@
+/* Exercises of the course Interfaces Homme Machine.
+ * Université Télécom Physique Strasbourg.
+ *
+ * @author Pedro Henrique SURUAGY PERRUSI
+ */
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
 
+// TODO: Auto-generated Javadoc
+/**
+ *  Squere geometry object (French).
+ */
 public class Carre extends Forme2D
 {
+	
+	/**  Square size. */
 	private float cote;
 	
+	/**
+	 * Instantiates a new carre.
+	 *
+	 * @param cote the cote
+	 */
 	public Carre(float cote) 
 	{
 		super();
 		setCote(cote);
 	}
 	
-	public Carre(float x, float y, Color color)
+	/**
+	 * Instantiates a new carre.
+	 *
+	 * @param x the origine.x
+	 * @param y the origine.y
+	 * @param color the color
+	 * @param cote the cote
+	 */
+	public Carre(float x, float y, Color color, float cote)
 	{
 		super(x, y, color);
+		setCote(cote);
 	}
 	
+	/**
+	 * Instantiates a new carre.
+	 *
+	 * @param ptOrigine the pt origine
+	 * @param color the color
+	 * @param cote the cote
+	 */
 	public Carre(Point2D ptOrigine, Color color, float cote) 
 	{
 		super(ptOrigine, color);
@@ -39,12 +71,18 @@ public class Carre extends Forme2D
 				": " + getCouleur().toString();
 	}
 	
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#computeArea()
+	 */
 	@Override
 	public double computeArea()
 	{
 		return cote*cote;
 	}
 
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#draw()
+	 */
 	@Override
 	public void draw()
 	{
@@ -52,6 +90,9 @@ public class Carre extends Forme2D
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#isInside(CI1_Editeur_Graphique2D.src.Point2D)
+	 */
 	@Override
 	public Boolean isInside(Point2D pt)
 	{
@@ -67,12 +108,18 @@ public class Carre extends Forme2D
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#isInside(float, float)
+	 */
 	@Override
 	public Boolean isInside(float x, float y)
 	{
 		return isInside(new Point2D(x,y));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(Forme2D autreForme)
 	{
@@ -86,11 +133,22 @@ public class Carre extends Forme2D
 		}
 	}
 
+	/**
+	 * Gets the cote.
+	 *
+	 * @return the cote
+	 */
 	public float getCote()
 	{
 		return cote;
 	}
 
+	/**
+	 * Sets the cote.
+	 *
+	 * @param cote the new cote
+	 * @throws WrongSizeException the wrong size exception
+	 */
 	public void setCote(float cote) throws WrongSizeException
 	{
 		if(cote < 0) 
