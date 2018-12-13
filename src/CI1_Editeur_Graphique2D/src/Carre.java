@@ -23,24 +23,26 @@ public class Carre extends Forme2D
 		setCote(cote);
 	}
 
+	/**
+	 * Describe the object by:
+	 * 		Carre: (x,y) : cote: coleur.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Carre: origine: cote: aire: coleur " + 
+				getOrigine().toString() + 
+				": " + Float.toString(getCote()) + 
+				": " + Double.toString(computeArea()) + 
+				": " + getCouleur().toString();
+	}
+	
 	@Override
 	public double computeArea()
 	{
 		return cote*cote;
-	}
-
-	@Override
-	public void translate(Point2D newOrigin)
-	{
-		setOrigine(newOrigin);
-		
-	}
-	
-	@Override
-	public void translate(float x, float y)
-	{
-		setOrigine(x, y);
-		
 	}
 
 	@Override
@@ -89,8 +91,12 @@ public class Carre extends Forme2D
 		return cote;
 	}
 
-	public void setCote(float cote)
+	public void setCote(float cote) throws WrongSizeException
 	{
+		if(cote < 0) 
+		{
+			throw new WrongSizeException("Cote du carre invalid");
+		}
 		this.cote = cote;
 	}
 }

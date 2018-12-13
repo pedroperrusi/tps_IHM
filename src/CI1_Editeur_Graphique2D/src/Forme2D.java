@@ -19,6 +19,10 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	/** The couleur. */
 	private Color couleur;
 	
+	/** Static parameter to count the number of created Forme2D;
+	 * All objects share this same memory adress. */
+	private static int nombreFormes2D = 0;
+	
 	// Constructors ------------------------------------
 	/**
 	 * Instantiates a new forme 2 D.
@@ -27,6 +31,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	{
 		setOrigine(0,0);
 		setCouleur(java.awt.Color.blue);
+		nombreFormes2D++;
 	}
 	
 	/**
@@ -40,6 +45,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	{
 		setOrigine(x,y);
 		setCouleur(color);
+		nombreFormes2D++;
 	}
 	
 	/**
@@ -52,6 +58,14 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	{
 		setOrigine(ptOrigine);
 		setCouleur(color);
+		nombreFormes2D++;
+	}
+	
+	// Destructor ------------------------------------------
+	/** When destructing an object, subtract the number of Forme2D*/
+	protected void finalize() throws Throwable
+	{
+		nombreFormes2D--;
 	}
 	
 	// Methods ---------------------------------------------
@@ -64,9 +78,28 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 */
 	public String toString() 
 	{
-		return "origine:coleur " + origine.toString() + ":" + couleur.toString();
+		return "origine:coleur " + origine.toString() + ": " + couleur.toString();
 	}
 	
+	/**
+	 * Translate the forme2D by deplacing its origine.
+	 * An adjust may be needed other points of the form too.
+	 */
+	public void translate(int dx, int dy)
+	{
+		setOrigine(new Point2D(origine.getX()+dx, 
+							   origine.getY()+dy));
+	}
+	
+	/**
+	 * Nombre formes 2 D created (static parameter).
+	 *
+	 * @return the int
+	 */
+	public static int nombreFormes2D()
+	{
+		return nombreFormes2D;
+	}
 	
 	// Abstract Methods ------------------------------------
 	
@@ -76,18 +109,6 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 * @return the double
 	 */
 	public abstract double computeArea();
-	
-	/**
-	 * Translate the forme2D by deplacing its origine.
-	 * An adjust may be needed other points of the form too.
-	 */
-	public abstract void translate(Point2D newOrigin);
-	
-	/**
-	 * Translate the forme2D by deplacing its origine.
-	 * An adjust may be needed other points of the form too.
-	 */
-	public abstract void translate(float x, float y);
 	
 	/**
 	 * Draw... still need to figure this out.

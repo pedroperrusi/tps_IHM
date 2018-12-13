@@ -40,8 +40,7 @@ public class Point2D
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/* Point2D to String
 	 */
 	public String toString() 
 	{
