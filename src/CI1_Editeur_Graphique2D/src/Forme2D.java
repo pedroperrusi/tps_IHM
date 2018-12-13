@@ -81,7 +81,13 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 * Translate the forme2D by deplacing its origine.
 	 * An adjust may be needed other points of the form too.
 	 */
-	public abstract void translate();
+	public abstract void translate(Point2D newOrigin);
+	
+	/**
+	 * Translate the forme2D by deplacing its origine.
+	 * An adjust may be needed other points of the form too.
+	 */
+	public abstract void translate(float x, float y);
 	
 	/**
 	 * Draw... still need to figure this out.
@@ -93,14 +99,14 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 *
 	 * @return the boolean
 	 */
-	public abstract Boolean isInside();
+	public abstract Boolean isInside(Point2D pt);
 	
 	/**
-	 * Area comparison between forme2D elements.
+	 * Checks if a point is inside the forme2D element.
 	 *
-	 * @return the double
+	 * @return the boolean
 	 */
-	public abstract double compareTo();
+	public abstract Boolean isInside(float x, float y);
 	
 	// 		Get/Set Methods ------------------------------------
 	/**
