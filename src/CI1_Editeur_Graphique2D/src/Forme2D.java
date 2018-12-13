@@ -23,6 +23,8 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 * All objects share this same memory adress. */
 	private static int nombreFormes2D = 0;
 	
+	private int formID;
+	
 	// Constructors ------------------------------------
 	/**
 	 * Instantiates a new forme 2 D.
@@ -32,6 +34,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		setOrigine(0,0);
 		setCouleur(java.awt.Color.blue);
 		nombreFormes2D++;
+		setFormID(nombreFormes2D);
 	}
 	
 	/**
@@ -46,6 +49,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		setOrigine(x,y);
 		setCouleur(color);
 		nombreFormes2D++;
+		setFormID(nombreFormes2D);
 	}
 	
 	/**
@@ -59,6 +63,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		setOrigine(ptOrigine);
 		setCouleur(color);
 		nombreFormes2D++;
+		setFormID(nombreFormes2D);
 	}
 	
 	// Destructor ------------------------------------------
@@ -209,6 +214,16 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		this.couleur = couleur;
 	}
 	
+	public int getFormID()
+	{
+		return formID;
+	}
+
+	public void setFormID(int formID)
+	{
+		this.formID = formID;
+	}
+
 	/**
 	 * The Class WrongOriginException.
 	 */
@@ -221,7 +236,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		 */
 		WrongOriginException()
 		{
-			super("Invalid origin coordinate value");
+			super("Invalid origin coordinate valueof form2D " + getFormID());
 		}
 		
 		/**
@@ -246,7 +261,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		 */
 		WrongSizeException()
 		{
-			super("Invalid values for width and height");
+			super("Invalid values for width and height of form2D " + getFormID());
 		}
 		
 		/**

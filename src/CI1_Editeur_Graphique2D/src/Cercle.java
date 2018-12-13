@@ -8,6 +8,8 @@ package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
 
+import CI1_Editeur_Graphique2D.src.Forme2D.WrongSizeException;
+
 /**
  * The Class Cercle (Circle).
  */
@@ -127,8 +129,12 @@ public class Cercle extends Forme2D
 	 *
 	 * @param radius the new radius
 	 */
-	public void setRadius(float radius)
+	public void setRadius(float radius) throws WrongSizeException
 	{
+		if(radius <= 0) 
+		{
+			throw new WrongSizeException("Radius du cercle" + getFormID() +" invalide");
+		}
 		this.radius = radius;
 	}
 

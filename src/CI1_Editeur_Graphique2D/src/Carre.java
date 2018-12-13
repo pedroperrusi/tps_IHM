@@ -7,6 +7,8 @@ package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
 
+import CI1_Editeur_Graphique2D.src.Forme2D.WrongSizeException;
+
 // TODO: Auto-generated Javadoc
 /**
  *  Squere geometry object (French).
@@ -135,9 +137,9 @@ public class Carre extends Forme2D
 	 */
 	public void setCote(float cote) throws WrongSizeException
 	{
-		if(cote < 0) 
+		if(cote <= 0) 
 		{
-			throw new WrongSizeException("Cote du carre invalid");
+			throw new WrongSizeException("Cote du carre "+ getFormID() +" invalide");
 		}
 		this.cote = cote;
 	}
