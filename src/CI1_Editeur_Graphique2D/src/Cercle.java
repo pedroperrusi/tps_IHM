@@ -70,6 +70,16 @@ public class Cercle extends Forme2D
 				": " + Double.toString(computeArea()) + 
 				": " + getCouleur().toString();
 	}
+	
+	/**
+	 * Redimensionnement of the circle size
+	 *
+	 * @param new Radius will become radius
+	 */
+	public void redimensionnement(float newRadius) 
+	{
+		setRadius(newRadius);
+	}
 
 	/* (non-Javadoc)
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#compareTo(CI1_Editeur_Graphique2D.src.Forme2D)

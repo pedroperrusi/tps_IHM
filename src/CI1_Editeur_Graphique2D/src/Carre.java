@@ -71,6 +71,16 @@ public class Carre extends Forme2D
 				": " + getCouleur().toString();
 	}
 	
+	/**
+	 * Redimensionnement of the square size
+	 *
+	 * @param newCote the new cote
+	 */
+	public void redimensionnement(float newCote) 
+	{
+		setCote(newCote);
+	}
+	
 	/* (non-Javadoc)
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#computeArea()
 	 */
