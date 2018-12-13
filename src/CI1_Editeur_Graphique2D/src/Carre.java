@@ -117,22 +117,6 @@ public class Carre extends Forme2D
 		return isInside(new Point2D(x,y));
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	@Override
-	public int compareTo(Forme2D autreForme)
-	{
-		if(this.computeArea() > autreForme.computeArea()) 
-		{
-			return 1;
-		}
-		else 
-		{
-			return -1;
-		}
-	}
-
 	/**
 	 * Gets the cote.
 	 *

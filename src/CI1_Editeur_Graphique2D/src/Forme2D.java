@@ -101,6 +101,23 @@ public abstract class Forme2D implements Comparable<Forme2D>
 		return nombreFormes2D;
 	}
 	
+	/** Compare areas between two forme 2D
+	 * 
+	 * @return 1 if this object area is bigger, -1 otherwise
+	 */
+	@Override
+	public int compareTo(Forme2D autreForme)
+	{
+		if(this.computeArea() > autreForme.computeArea()) 
+		{
+			return 1;
+		}
+		else 
+		{
+			return -1;
+		}
+	}
+	
 	// Abstract Methods ------------------------------------
 	
 	/**
