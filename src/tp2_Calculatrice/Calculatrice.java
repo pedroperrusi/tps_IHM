@@ -46,16 +46,7 @@ public class Calculatrice
 		else if (operation == "x")
 			return accum * secondOperand;
 		else if (operation == "/")
-		{
-			try
-			{
-				return division(accum, secondOperand);
-			}
-			catch(InvalidUserEntry e) 
-			{
-				throw e;
-			}
-		}
+			return division(accum, secondOperand);
 		else
 			return accum;
 	}
