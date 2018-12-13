@@ -1,14 +1,11 @@
 package CI1_Editeur_Graphique2D.src;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * The Class EditeurGraphique2D.
@@ -35,9 +32,9 @@ public class EditeurGraphique2D extends JFrame
 	}
 	
 	/** The zone dessin. */
-	ZoneDeDessin zoneDessin;
+	public ZoneDeDessin zoneDessin;
 	/** Editeur Panel */
-	JPanel editeurPanel;
+	public JPanel editeurPanel;
 	
 	/**
 	 * Instantiates a new editeur graphique 2 D.
@@ -54,6 +51,7 @@ public class EditeurGraphique2D extends JFrame
 		
 		zoneDessin = new ZoneDeDessin();
 		add(zoneDessin, BorderLayout.CENTER);
+		add(createBoutons(), BorderLayout.SOUTH);
 	}
 	
 	/**
@@ -62,6 +60,21 @@ public class EditeurGraphique2D extends JFrame
 	public EditeurGraphique2D() 
 	{
 		this("Editeur Graphique 2D");
+	}
+	
+	private JPanel createBoutons() 
+	{
+		// créé un panel avec des éléments alignés à gauche
+		final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER,200,0));
+		// création du bouton ajouter
+		final JButton ajouter = new JButton("+");
+		// création d’une action pour ajouter dans la liste
+		ActionAjouter actionAjout = new ActionAjouter();
+		// affectation de cette action au bouton
+		ajouter.addActionListener(actionAjout);
+		// ajout du bouton dans la fenetre
+		panel.add(ajouter);
+		return panel;
 	}
 	
 	/**
@@ -78,13 +91,59 @@ public class EditeurGraphique2D extends JFrame
 		public ZoneDeDessin()
 		{
 			super();
-			repaint();
+			listeFormes = new ArrayList<Forme2D>();
 		}
 		
 		public void paint(Graphics g)
 		{
-			g.fillOval(50, 50, 100, 100);
+			for(int i = 0; i < listeFormes.size(); i++) 
+			{
+				listeFormes.get(i).draw(g);
+			}
 		}
+	}
+	
+	class ActionAjouter implements ActionListener
+	{
 
+		public ActionAjouter() 
+		{
+			super();
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			Point2D origin = randomPosition();
+			Color color = new Color(randomColor(), randomColor(), randomColor());
+			float cote = randomTaille();
+			try 
+			{
+				zoneDessin.listeFormes.add(new Carre(origin, color, cote));
+				zoneDessin.repaint();
+			}
+			catch(Exception except) 
+			{
+				
+			}
+		}
+		
+		Point2D randomPosition() 
+		{
+			float x = (float) (Math.random() * LARGEUR_PAR_DEFAUT);
+			float y = (float) (Math.random() * HAUTEUR_PAR_DEFAUT);
+			return new Point2D(x, y);
+		}
+		
+		float randomColor() 
+		{
+			return (float) (Math.random() * 1);
+		}
+		
+		float randomTaille() 
+		{
+			return (float) (50 + Math.random() * ( 150 - 50));
+		}
+		
 	}
 }

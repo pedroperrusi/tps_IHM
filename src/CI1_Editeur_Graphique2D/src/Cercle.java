@@ -7,6 +7,7 @@
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * The Class Cercle (Circle).
@@ -119,9 +120,14 @@ public class Cercle extends Forme2D
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#draw()
 	 */
 	@Override
-	public void draw()
+	public void draw(Graphics g)
 	{
-		// TODO Auto-generated method stub
+		int x = Math.round(getOrigine().getX());
+		int y = Math.round(getOrigine().getY());
+		
+		int radius = Math.round(getRadius());
+		
+		g.drawOval(x, y, radius, radius);
 
 	}
 

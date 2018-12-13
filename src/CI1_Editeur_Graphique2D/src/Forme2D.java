@@ -6,6 +6,7 @@
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * The Class Forme2D.
@@ -135,7 +136,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	/**
 	 * Draw... still need to figure this out.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics g);
 	
 	/**
 	 * Checks if a point is inside the forme2D element.
