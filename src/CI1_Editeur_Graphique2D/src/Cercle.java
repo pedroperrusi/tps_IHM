@@ -124,9 +124,8 @@ public class Cercle extends Forme2D
 	{
 		int x = Math.round(getOrigine().getX());
 		int y = Math.round(getOrigine().getY());
-		
 		int radius = Math.round(getRadius());
-		
+		g.setColor(getCouleur());
 		g.drawOval(x, y, radius, radius);
 
 	}

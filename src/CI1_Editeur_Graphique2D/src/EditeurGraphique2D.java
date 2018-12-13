@@ -124,7 +124,7 @@ public class EditeurGraphique2D extends JFrame
 			}
 			catch(Exception except) 
 			{
-				
+				System.out.println(except.toString());
 			}
 		}
 		
@@ -135,9 +135,9 @@ public class EditeurGraphique2D extends JFrame
 			return new Point2D(x, y);
 		}
 		
-		float randomColor() 
+		int randomColor() 
 		{
-			return (float) (Math.random() * 1);
+			return (int)(Math.random() * 255);
 		}
 		
 		float randomTaille() 
