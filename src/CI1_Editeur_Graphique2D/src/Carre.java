@@ -147,7 +147,7 @@ public class Carre extends Forme2D
 	{
 		if(cote <= 0) 
 		{
-			throw new WrongSizeException("Cote du carre "+ getFormID() +" invalide");
+			throw new WrongSizeException("Cote du carre "+ getFormID() + " invalide");
 		}
 		this.cote = cote;
 	}
