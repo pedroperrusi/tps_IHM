@@ -54,6 +54,22 @@ public class Cercle extends Forme2D
 		super(ptOrigine, color);
 		setRadius(radius);
 	}
+	
+	/**
+	 * Describe the object by:
+	 * 		Cercle: (x,y) : radius: area: coleur.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Carre: origine: cote: aire: coleur " + 
+				getOrigine().toString() + 
+				": " + Float.toString(getRadius()) + 
+				": " + Double.toString(computeArea()) + 
+				": " + getCouleur().toString();
+	}
 
 	/* (non-Javadoc)
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#compareTo(CI1_Editeur_Graphique2D.src.Forme2D)
