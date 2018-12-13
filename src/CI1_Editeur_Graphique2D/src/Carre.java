@@ -57,7 +57,7 @@ public class Carre extends Forme2D
 
 	/**
 	 * Describe the object by:
-	 * 		Carre: (x,y) : cote: coleur.
+	 * 		Carre: (x,y) : cote: area: coleur.
 	 *
 	 * @return the string
 	 */
