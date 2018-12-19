@@ -123,6 +123,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 			return -1;
 		}
 	}
+		
 	
 	// Abstract Methods ------------------------------------
 	
@@ -134,9 +135,12 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	public abstract double computeArea();
 	
 	/**
-	 * Draw... still need to figure this out.
+	 * Draw object accordingly to its specification, or red if it is selected
+	 *
+	 * @param g the graphics element
+	 * @param boolean which indicates if this form has been selected
 	 */
-	public abstract void draw(Graphics g);
+	public abstract void draw(Graphics g, boolean selected);
 	
 	/**
 	 * Checks if a point is inside the forme2D element.

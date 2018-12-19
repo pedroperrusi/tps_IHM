@@ -122,6 +122,9 @@ public class EditeurGraphique2D extends JFrame
 		/** The liste formes. */
 		ArrayList<Forme2D> listeFormes;
 
+		/** The selected forme2D id. */
+		int selectedId;
+		
 		/**
 		 * Instantiates a new zone de dessin.
 		 */
@@ -140,7 +143,10 @@ public class EditeurGraphique2D extends JFrame
 		{
 			for(Forme2D forme : listeFormes)
 			{
-				forme.draw(g);
+				if(this.selectedId == forme.getFormID())
+					forme.draw(g, true);
+				else
+					forme.draw(g, false);
 			}
 		}
 		
@@ -211,7 +217,7 @@ public class EditeurGraphique2D extends JFrame
 			{
 				if(forme.isInside(point)) 
 				{
-					forme.setCouleur(Color.RED);
+					this.selectedId = forme.getFormID();
 					break;
 				}
 			}

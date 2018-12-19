@@ -95,12 +95,16 @@ public class Carre extends Forme2D
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#draw()
 	 */
 	@Override
-	public void draw(Graphics g)
+	public void draw(Graphics g, boolean selected)
 	{
 		int x = Math.round(getOrigine().getX());
 		int y = Math.round(getOrigine().getY());
 		int cote = Math.round(getCote());
-		g.setColor(getCouleur());
+		// check if the object is selected
+		if(selected)
+			g.setColor(Color.red);
+		else
+			g.setColor(getCouleur());
 		g.fillRect(x, y, cote, cote);
 	}
 
