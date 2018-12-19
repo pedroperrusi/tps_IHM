@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -136,7 +137,10 @@ public class EditeurGraphique2D extends JFrame
 			// listens to keyboard inputs
 			this.addKeyListener(new KeyboardInputs());
 			// listens to mouse clicks
-			this.addMouseListener(new MouseInputs());
+			MouseInputs mouseInterface = new MouseInputs();
+			this.addMouseListener(mouseInterface);
+			
+			this.addMouseMotionListener(mouseInterface);
 		}
 		
 		public void paint(Graphics g)
@@ -217,17 +221,43 @@ public class EditeurGraphique2D extends JFrame
 			this.repaint();
 		}
 		
-		public void selectForm2D(Point2D point) 
+		public boolean selectForm2D(Point2D point) 
 		{
+			boolean sameFormSelected = false;
 			for(Forme2D forme : listeFormes)
 			{
 				if(forme.isInside(point)) 
 				{
-					this.selectedId = forme.getFormID();
+					if(this.selectedId == forme.getFormID())
+						sameFormSelected = true;
+					else
+						this.selectedId = forme.getFormID();
 					break;
 				}
 			}
 			this.repaint();
+			return sameFormSelected;
+		}
+		
+		public void deplaceSelectedForme(Point2D newOrigin) 
+		{
+			for(Forme2D forme : listeFormes)
+			{
+				if(this.selectedId == forme.getFormID()) 
+				{
+					forme.setOrigine(newOrigin);
+					break;
+				}
+			}
+			this.repaint();
+		}
+		
+		public boolean anySelected() 
+		{
+			if(this.selectedId != 0)
+				return true;
+			else
+				return false;
 		}
 		
 	}
@@ -324,18 +354,37 @@ public class EditeurGraphique2D extends JFrame
 		
 	}
 	
-	class MouseInputs implements MouseListener
+	class MouseInputs implements MouseListener, MouseMotionListener
 	{
-
+		boolean focusSelected;
 		@Override
 		public void mouseClicked(MouseEvent event)
 		{
-			// if its a left click
+			// if its a left click and no form is selected, select form2D
 			if(SwingUtilities.isLeftMouseButton(event))
-				zoneDessin.selectForm2D(new Point2D(event.getX(), event.getY()));
-			// if its a right click
-			else if(SwingUtilities.isRightMouseButton(event))
+				this.focusSelected = zoneDessin.selectForm2D(new Point2D(event.getX(), 
+															 		     event.getY()));
+			// if its a right click, descelect any form2D
+			if(SwingUtilities.isRightMouseButton(event))
 				zoneDessin.unselectForm2D();
+		}
+		
+		@Override
+		public void mouseDragged(MouseEvent event)
+		{
+			// If the last form clicked is the selected one
+			if(focusSelected) 
+			{
+				try 
+				{
+					zoneDessin.deplaceSelectedForme(new Point2D(event.getX(), 
+																event.getY()));
+				}catch(Exception exeption) 
+				{
+					System.out.println(exeption);
+				}
+			}
+			
 		}
 
 		@Override
@@ -361,6 +410,13 @@ public class EditeurGraphique2D extends JFrame
 
 		@Override
 		public void mouseReleased(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0)
 		{
 			// TODO Auto-generated method stub
 			
