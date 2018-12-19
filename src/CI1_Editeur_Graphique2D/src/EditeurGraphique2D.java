@@ -123,7 +123,7 @@ public class EditeurGraphique2D extends JFrame
 		ArrayList<Forme2D> listeFormes;
 
 		/** The selected forme2D id. */
-		int selectedId;
+		private int selectedId;
 		
 		/**
 		 * Instantiates a new zone de dessin.
@@ -208,6 +208,12 @@ public class EditeurGraphique2D extends JFrame
 					}
 				}
 			}
+			this.repaint();
+		}
+		
+		public void unselectForm2D() 
+		{
+			this.selectedId = 0;
 			this.repaint();
 		}
 		
@@ -324,7 +330,12 @@ public class EditeurGraphique2D extends JFrame
 		@Override
 		public void mouseClicked(MouseEvent event)
 		{
-			zoneDessin.selectForm2D(new Point2D(event.getX(), event.getY()));
+			// if its a left click
+			if(SwingUtilities.isLeftMouseButton(event))
+				zoneDessin.selectForm2D(new Point2D(event.getX(), event.getY()));
+			// if its a right click
+			else if(SwingUtilities.isRightMouseButton(event))
+				zoneDessin.unselectForm2D();
 		}
 
 		@Override
