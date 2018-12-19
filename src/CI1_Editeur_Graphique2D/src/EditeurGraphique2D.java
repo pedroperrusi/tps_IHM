@@ -125,6 +125,26 @@ public class EditeurGraphique2D extends JFrame
 			this.addKeyListener(new KeyboardInputs());
 		}
 		
+		public void addRandomSquare() 
+		{
+			Point2D origin = randomPosition();
+			Color color = new Color(randomColor(), randomColor(), randomColor());
+			float cote = randomTaille();
+			
+			this.listeFormes.add(new Carre(origin, color, cote));
+			this.repaint();
+		}
+		
+		public void addRandomCircle() 
+		{
+			Point2D origin = randomPosition();
+			Color color = new Color(randomColor(), randomColor(), randomColor());
+			float radius = randomTaille();
+			
+			this.listeFormes.add(new Cercle(origin, color, radius));
+			this.repaint();
+		}
+		
 		public void sortForme2D() 
 		{
 			// Sort objects forme2D accordingly to their surface
@@ -165,14 +185,9 @@ public class EditeurGraphique2D extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			Point2D origin = randomPosition();
-			Color color = new Color(randomColor(), randomColor(),
-					randomColor());
-			float cote = randomTaille();
 			try
 			{
-				zoneDessin.listeFormes.add(new Carre(origin, color, cote));
-				zoneDessin.repaint();
+				zoneDessin.addRandomSquare();
 			} catch (Exception except)
 			{
 				System.out.println(except.toString());
@@ -234,22 +249,15 @@ public class EditeurGraphique2D extends JFrame
 		public void keyPressed(KeyEvent event)
 		{
 			char key = event.getKeyChar();
-			// Generate information for the form creation
-			Point2D origin = randomPosition();
-			Color color = new Color(randomColor(), randomColor(),
-					randomColor());
-			float taille = randomTaille();
 			// If user press r, draw square
 			if(key == 'r') 
 			{
-				zoneDessin.listeFormes.add(new Carre(origin, color, taille));
-				zoneDessin.repaint();
+				zoneDessin.addRandomSquare();
 			}
 			// If user press c, draw circle
 			if(key == 'c') 
 			{
-				zoneDessin.listeFormes.add(new Cercle(origin, color, taille));
-				zoneDessin.repaint();
+				zoneDessin.addRandomCircle();
 			}
 		}
 
