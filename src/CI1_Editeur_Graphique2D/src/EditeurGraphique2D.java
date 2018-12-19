@@ -75,6 +75,25 @@ public class EditeurGraphique2D extends JFrame
 		this("Editeur Graphique 2D");
 	}
 
+	/** Methodes utiles --------------------------*/
+	
+	Point2D randomPosition()
+	{
+		float x = (float) (Math.random() * LARGEUR_PAR_DEFAUT);
+		float y = (float) (Math.random() * HAUTEUR_PAR_DEFAUT);
+		return new Point2D(x, y);
+	}
+
+	int randomColor()
+	{
+		return (int) (Math.random() * 255);
+	}
+
+	float randomTaille()
+	{
+		return (float) (MIN_FORM_TAILLE + Math.random() * (MAX_FORM_TAILLE - MIN_FORM_TAILLE));
+	}
+	
 	private JPanel createBoutons()
 	{
 		// créé un panel avec des éléments alignés à gauche
@@ -112,6 +131,28 @@ public class EditeurGraphique2D extends JFrame
 		// ajout du bouton dans la fenetre
 		panel.add(tri);
 
+		// adds radio buttons for selecting square or circle
+		// squere button
+		JRadioButton carreButton = new JRadioButton("Carre");
+		carreButton.setFocusable(false);
+		carreButton.setActionCommand("Carre");
+		carreButton.setSelected(true);
+		// circle button
+		JRadioButton cercleButton = new JRadioButton("Cercle");
+		cercleButton.setFocusable(false);
+		cercleButton.setActionCommand("Cercle");
+		cercleButton.setSelected(false);
+		// radio button group (pour selectioner seulement 1 des buttons)
+		ButtonGroup group = new ButtonGroup();
+		group.add(carreButton);
+		group.add(cercleButton);
+		// add actionListener
+		carreButton.addActionListener(new ActionSelectForme());
+		cercleButton.addActionListener(new ActionSelectForme());
+		// add group 
+		panel.add(carreButton);
+		panel.add(cercleButton);
+		
 		return panel;
 	}
 
@@ -120,6 +161,9 @@ public class EditeurGraphique2D extends JFrame
 	 */
 	class ZoneDeDessin extends Component
 	{
+		/** Selected forme by default (1: carre, 2: cercle)*/
+		public int selectedForme = 1;
+		
 		/** The liste formes. */
 		ArrayList<Forme2D> listeFormes;
 
@@ -139,7 +183,6 @@ public class EditeurGraphique2D extends JFrame
 			// listens to mouse clicks
 			MouseInputs mouseInterface = new MouseInputs();
 			this.addMouseListener(mouseInterface);
-			
 			this.addMouseMotionListener(mouseInterface);
 		}
 		
@@ -152,6 +195,14 @@ public class EditeurGraphique2D extends JFrame
 				else
 					forme.draw(g, false);
 			}
+		}
+		
+		public void addRandomDefaultForme() 
+		{
+			if(selectedForme == 1)
+				this.addRandomSquare();
+			if(selectedForme == 2)
+				this.addRandomCircle();
 		}
 		
 		public void addRandomSquare() 
@@ -269,7 +320,7 @@ public class EditeurGraphique2D extends JFrame
 		{
 			try
 			{
-				zoneDessin.addRandomSquare();
+				zoneDessin.addRandomDefaultForme();
 			} catch (Exception except)
 			{
 				System.out.println(except.toString());
@@ -296,24 +347,23 @@ public class EditeurGraphique2D extends JFrame
 		}
 
 	}
-
-	Point2D randomPosition()
+	
+	class ActionSelectForme implements ActionListener
 	{
-		float x = (float) (Math.random() * LARGEUR_PAR_DEFAUT);
-		float y = (float) (Math.random() * HAUTEUR_PAR_DEFAUT);
-		return new Point2D(x, y);
+		@Override
+		public void actionPerformed(ActionEvent event)
+		{
+			if(event.getActionCommand() == "Carre") 
+			{
+				zoneDessin.selectedForme = 1;
+			}
+			else if(event.getActionCommand() == "Cercle") 
+			{
+				zoneDessin.selectedForme = 2;
+			}
+		}
 	}
-
-	int randomColor()
-	{
-		return (int) (Math.random() * 255);
-	}
-
-	float randomTaille()
-	{
-		return (float) (MIN_FORM_TAILLE + Math.random() * (MAX_FORM_TAILLE - MIN_FORM_TAILLE));
-	}
-
+	
 	class KeyboardInputs implements KeyListener
 	{
 
@@ -337,21 +387,10 @@ public class EditeurGraphique2D extends JFrame
 				zoneDessin.removeLastForm();
 			}
 		}
-
 		@Override
-		public void keyReleased(KeyEvent event)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void keyReleased(KeyEvent event){}
 		@Override
-		public void keyTyped(KeyEvent event)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void keyTyped(KeyEvent event){}
 	}
 	
 	class MouseInputs implements MouseListener, MouseMotionListener
@@ -384,7 +423,6 @@ public class EditeurGraphique2D extends JFrame
 					System.out.println(exeption);
 				}
 			}
-			
 		}
 
 		@Override
@@ -393,35 +431,14 @@ public class EditeurGraphique2D extends JFrame
 			// TODO Auto-generated method stub
 			
 		}
-
 		@Override
-		public void mouseExited(MouseEvent arg0)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseExited(MouseEvent arg0){}
 		@Override
-		public void mousePressed(MouseEvent arg0)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mousePressed(MouseEvent arg0){}
 		@Override
-		public void mouseReleased(MouseEvent arg0)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void mouseReleased(MouseEvent arg0){}
 		@Override
-		public void mouseMoved(MouseEvent arg0)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void mouseMoved(MouseEvent arg0){}
 	}
 	
 }
