@@ -101,7 +101,7 @@ public class Carre extends Forme2D
 		int y = Math.round(getOrigine().getY());
 		int cote = Math.round(getCote());
 		g.setColor(getCouleur());
-		g.drawRect(x, y, cote, cote);
+		g.fillRect(x, y, cote, cote);
 	}
 
 	/* (non-Javadoc)
