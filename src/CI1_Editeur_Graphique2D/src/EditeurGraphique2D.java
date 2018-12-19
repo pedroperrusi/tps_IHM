@@ -78,6 +78,8 @@ public class EditeurGraphique2D extends JFrame
 		final JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 0));
 		// création du bouton ajouter
 		final JButton ajouter = new JButton("+");
+		// bouton ne peut pas etre focalisee
+		ajouter.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
 		ActionAjouter actionAjout = new ActionAjouter();
 		// affectation de cette action au bouton
@@ -87,6 +89,8 @@ public class EditeurGraphique2D extends JFrame
 
 		// création du bouton suprimmer
 		final JButton supprimer = new JButton("-");
+		// bouton ne peut pas etre focalisee
+		supprimer.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
 		ActionSupress actionSupress = new ActionSupress();
 		// affectation de cette action au bouton
@@ -96,6 +100,8 @@ public class EditeurGraphique2D extends JFrame
 
 		// création du bouton triage
 		final JButton tri = new JButton("TRI");
+		// bouton ne peut pas etre focalisee
+		tri.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
 		ActionTriage actionTriage = new ActionTriage();
 		// affectation de cette action au bouton
