@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -128,7 +130,18 @@ public class EditeurGraphique2D extends JFrame
 			super();
 			listeFormes = new ArrayList<Forme2D>();
 			this.setFocusable(true);
+			// listens to keyboard inputs
 			this.addKeyListener(new KeyboardInputs());
+			// listens to mouse clicks
+			this.addMouseListener(new MouseInputs());
+		}
+		
+		public void paint(Graphics g)
+		{
+			for(Forme2D forme : listeFormes)
+			{
+				forme.draw(g);
+			}
 		}
 		
 		public void addRandomSquare() 
@@ -149,6 +162,20 @@ public class EditeurGraphique2D extends JFrame
 			
 			this.listeFormes.add(new Cercle(origin, color, radius));
 			this.repaint();
+		}
+		
+		public void removeLastForm() 
+		{
+			if (this.listeFormes.size() == 0)
+				return;
+			try
+			{
+				this.listeFormes.remove(this.listeFormes.size() - 1);
+				this.repaint();
+			} catch (Exception except)
+			{
+				System.out.println(except.toString());
+			}
 		}
 		
 		public void sortForme2D() 
@@ -175,15 +202,22 @@ public class EditeurGraphique2D extends JFrame
 					}
 				}
 			}
+			this.repaint();
 		}
-
-		public void paint(Graphics g)
+		
+		public void selectForm2D(Point2D point) 
 		{
 			for(Forme2D forme : listeFormes)
 			{
-				forme.draw(g);
+				if(forme.isInside(point)) 
+				{
+					forme.setCouleur(Color.RED);
+					break;
+				}
 			}
+			this.repaint();
 		}
+		
 	}
 	
 	class ActionAjouter implements ActionListener
@@ -206,16 +240,7 @@ public class EditeurGraphique2D extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if (zoneDessin.listeFormes.size() == 0)
-				return;
-			try
-			{
-				zoneDessin.listeFormes.remove(zoneDessin.listeFormes.size() - 1);
-				zoneDessin.repaint();
-			} catch (Exception except)
-			{
-				System.out.println(except.toString());
-			}
+			zoneDessin.removeLastForm();
 		}
 
 	}
@@ -226,7 +251,6 @@ public class EditeurGraphique2D extends JFrame
 		public void actionPerformed(ActionEvent e)
 		{
 			zoneDessin.sortForme2D();
-			zoneDessin.repaint();
 		}
 
 	}
@@ -265,6 +289,11 @@ public class EditeurGraphique2D extends JFrame
 			{
 				zoneDessin.addRandomCircle();
 			}
+			// If user press d, supress last form2D
+			if(key == 'd') 
+			{
+				zoneDessin.removeLastForm();
+			}
 		}
 
 		@Override
@@ -276,6 +305,45 @@ public class EditeurGraphique2D extends JFrame
 
 		@Override
 		public void keyTyped(KeyEvent event)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	class MouseInputs implements MouseListener
+	{
+
+		@Override
+		public void mouseClicked(MouseEvent event)
+		{
+			zoneDessin.selectForm2D(new Point2D(event.getX(), event.getY()));
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0)
 		{
 			// TODO Auto-generated method stub
 			
