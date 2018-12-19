@@ -19,6 +19,10 @@ public class EditeurGraphique2D extends JFrame
 
 	/** The Constant LARGEUR_PAR_DEFAUT. */
 	private final static int LARGEUR_PAR_DEFAUT = 600;
+	
+	private final static int MIN_FORM_TAILLE = 50;
+	
+	private final static int MAX_FORM_TAILLE = 150;
 
 	/**
 	 * The main method.
@@ -116,16 +120,42 @@ public class EditeurGraphique2D extends JFrame
 			super();
 			listeFormes = new ArrayList<Forme2D>();
 		}
+		
+		public void sortForme2D() 
+		{
+			// Sort objects forme2D accordingly to their surface
+			Collections.sort(this.listeFormes, Collections.reverseOrder());
+			// Deplace them in reverse order.
+			int accumX = 0, accumY = 0;
+			for(Forme2D forme : listeFormes)
+			{
+				forme.setOrigine(accumX, accumY);
+				accumX += MAX_FORM_TAILLE;
+				// if formes depass the default width, reset X and deplace Y
+				if(accumX > LARGEUR_PAR_DEFAUT) 
+				{
+					accumX = 0;
+					accumY += MAX_FORM_TAILLE; 
+					// if formes depass both width and height of the window... 
+					// reset to 0
+					if(accumY > HAUTEUR_PAR_DEFAUT) 
+					{
+						accumX = 0;
+						accumY = 0;
+					}
+				}
+			}
+		}
 
 		public void paint(Graphics g)
 		{
-			for(Forme2D f : listeFormes)
+			for(Forme2D forme : listeFormes)
 			{
-				f.draw(g);
+				forme.draw(g);
 			}
 		}
 	}
-
+	
 	class ActionAjouter implements ActionListener
 	{
 		@Override
@@ -170,8 +200,8 @@ public class EditeurGraphique2D extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			Collections.sort(zoneDessin.listeFormes, Collections.reverseOrder());
-			// TODO: ordener leur origines
+			zoneDessin.sortForme2D();
+			zoneDessin.repaint();
 		}
 
 	}
@@ -190,7 +220,7 @@ public class EditeurGraphique2D extends JFrame
 
 	float randomTaille()
 	{
-		return (float) (50 + Math.random() * (150 - 50));
+		return (float) (MIN_FORM_TAILLE + Math.random() * (MAX_FORM_TAILLE - MIN_FORM_TAILLE));
 	}
 
 }
