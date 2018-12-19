@@ -92,20 +92,6 @@ public class Cercle extends Forme2D
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * CI1_Editeur_Graphique2D.src.Forme2D#compareTo(CI1_Editeur_Graphique2D.src
-	 * .Forme2D)
-	 */
-	@Override
-	public int compareTo(Forme2D arg0)
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#computeArea()
 	 */
 	@Override
