@@ -1,3 +1,9 @@
+/* Exercises of the course Interfaces Homme Machine.
+ * Université Télécom Physique Strasbourg.
+ *
+ * @author Pedro Henrique SURUAGY PERRUSI
+ */
+
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.event.ActionEvent;
