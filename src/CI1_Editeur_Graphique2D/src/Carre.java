@@ -127,6 +127,28 @@ public class Carre extends Forme2D
 	}
 	
 	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#isBorder(CI1_Editeur_Graphique2D.src.Point2D, int)
+	 */
+	@Override
+	public Boolean isBorder(Point2D pt, int borderTolerance)
+	{
+		float dx_left = Math.abs(getOrigine().getX() - pt.getX());
+		float dx_right = Math.abs(getOrigine().getX() + cote - pt.getX());
+		float dy_up = Math.abs(pt.getY() - getOrigine().getY());
+		float dy_down = Math.abs(pt.getY() + cote - getOrigine().getY());
+		// If any difference to the rectangle arest is less than tolerance, it is in the border
+		if(dx_left < borderTolerance || dx_right < borderTolerance ||
+			dy_up < borderTolerance || dy_down < borderTolerance)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+	
+	/* (non-Javadoc)
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#isInside(float, float)
 	 */
 	@Override

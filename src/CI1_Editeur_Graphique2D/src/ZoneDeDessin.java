@@ -26,11 +26,14 @@ class ZoneDeDessin extends Component
 	/** The selected forme2D id. */
 	private int selectedId;
 	
-	/** The window height. */
+	/** The window height and width. */
 	int windowWidith, windowHeight;
 	
-	/** The max form size. */
+	/** The max and min form size. */
 	int minFormSize, maxFormSize;
+	
+	/** The number of pixels tolerated to consider a border */
+	int borderTolerance;
 	
 	/**
 	 * Instantiates a new zone de dessin.
@@ -40,7 +43,7 @@ class ZoneDeDessin extends Component
 	 * @param minFormSize the min form size
 	 * @param maxFormSize the max form size
 	 */
-	public ZoneDeDessin(int windowWidith, int windowHeight, int minFormSize, int maxFormSize)
+	public ZoneDeDessin(int windowWidith, int windowHeight, int minFormSize, int maxFormSize, int borderTolerance)
 	{
 		super();
 		// Add window and forms minimum and maximum sizes
@@ -48,12 +51,13 @@ class ZoneDeDessin extends Component
 		this.windowHeight = windowHeight;
 		this.minFormSize = minFormSize;
 		this.maxFormSize = maxFormSize;
+		this.borderTolerance = borderTolerance;
 		listeFormes = new ArrayList<Forme2D>();
 		this.setFocusable(true);
 		// listens to keyboard inputs
 		this.addKeyListener(new KeyboardInputs(this));
 		// listens to mouse clicks
-		MouseInputs mouseInterface = new MouseInputs(this);
+		MouseInputs mouseInterface = new MouseInputs(this, borderTolerance);
 		this.addMouseListener(mouseInterface);
 		this.addMouseMotionListener(mouseInterface);
 	}
@@ -171,7 +175,7 @@ class ZoneDeDessin extends Component
 	 * @param point the point
 	 * @return true if the same form has been selected twice.
 	 */
-	public boolean selectForm2D(Point2D point) 
+	public boolean selectForm2D(Point2D point, int borderTolerance) 
 	{
 		boolean sameFormSelected = false;
 		// loop through each form
@@ -182,9 +186,18 @@ class ZoneDeDessin extends Component
 			{
 				// if that same form was previously selected
 				if(this.selectedId == forme.getFormID())
+				{
 					sameFormSelected = true;
+//					if(forme.isBorder(point, borderTolerance)) 
+//					{
+//						
+//					}
+				}
 				else
+				{
+					// if a new form has been selected, save its ID
 					this.selectedId = forme.getFormID();
+				}
 				break;
 			}
 		}

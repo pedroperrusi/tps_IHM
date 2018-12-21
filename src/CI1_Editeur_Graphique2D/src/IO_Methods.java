@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 
 class ActionAjouter implements ActionListener
 {
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
 	ActionAjouter(ZoneDeDessin dessin)
@@ -40,6 +41,7 @@ class ActionAjouter implements ActionListener
 
 class ActionSupress implements ActionListener
 {
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
 	ActionSupress(ZoneDeDessin dessin)
@@ -57,6 +59,7 @@ class ActionSupress implements ActionListener
 
 class ActionTriage implements ActionListener
 {
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
 	ActionTriage(ZoneDeDessin dessin)
@@ -74,6 +77,7 @@ class ActionTriage implements ActionListener
 
 class ActionSelectForme implements ActionListener
 {
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
 	ActionSelectForme(ZoneDeDessin dessin)
@@ -97,6 +101,7 @@ class ActionSelectForme implements ActionListener
 
 class KeyboardInputs implements KeyListener
 {
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
 	KeyboardInputs(ZoneDeDessin dessin)
@@ -132,13 +137,19 @@ class KeyboardInputs implements KeyListener
 
 class MouseInputs implements MouseListener, MouseMotionListener
 {
+	/** Boolean which indicates if a form is being selected or not*/
 	boolean focusSelected;
 	
+	/** Tolerance for region considered as border*/
+	int borderTolerance;
+	
+	/** Zone de dessin object */
 	ZoneDeDessin dessin;
 	
-	MouseInputs(ZoneDeDessin dessin)
+	MouseInputs(ZoneDeDessin dessin, int borderTolerance)
 	{
 		this.dessin = dessin;
+		this.borderTolerance = borderTolerance;
 	}
 	
 	@Override
@@ -146,8 +157,8 @@ class MouseInputs implements MouseListener, MouseMotionListener
 	{
 		// if its a left click and no form is selected, select form2D
 		if(SwingUtilities.isLeftMouseButton(event))
-			this.focusSelected = dessin.selectForm2D(new Point2D(event.getX(), 
-														 		     event.getY()));
+			this.focusSelected = dessin.selectForm2D(new Point2D(event.getX(), event.getY()),
+													 this.borderTolerance);
 		// if its a right click, descelect any form2D
 		if(SwingUtilities.isRightMouseButton(event))
 			dessin.unselectForm2D();

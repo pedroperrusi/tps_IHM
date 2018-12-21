@@ -69,7 +69,7 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	
 	// Destructor ------------------------------------------
 	/** When destructing an object, subtract the number of Forme2D*/
-	protected void finalize() throws Throwable
+	protected void finalize()
 	{
 		nombreFormes2D--;
 	}
@@ -148,6 +148,13 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 * @return the boolean
 	 */
 	public abstract Boolean isInside(Point2D pt);
+	
+	/**
+	 * Checks if a point is in the border of a forme2D element.
+	 *
+	 * @return the boolean
+	 */
+	public abstract Boolean isBorder(Point2D pt, int borderTolerance);
 	
 	/**
 	 * Checks if a point is inside the forme2D element.

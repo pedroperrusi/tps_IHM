@@ -29,6 +29,9 @@ public class EditeurGraphique2D extends JFrame
 	
 	/** The Constant MAX_FORM_TAILLE. */
 	private final static int MAX_FORM_TAILLE = 150;
+	
+	/** The Constant BORDER_TOLERANCE */
+	private final static int BORDER_TOLERANCE = 5;
 
 	/**
 	 * The main method.
@@ -65,7 +68,8 @@ public class EditeurGraphique2D extends JFrame
 		this.add(new JLabel("TP4"), BorderLayout.NORTH);
 
 		zoneDessin = new ZoneDeDessin(LARGEUR_PAR_DEFAUT, HAUTEUR_PAR_DEFAUT,
-									  MIN_FORM_TAILLE, MAX_FORM_TAILLE);
+									  MIN_FORM_TAILLE, MAX_FORM_TAILLE,
+									  BORDER_TOLERANCE);
 		add(zoneDessin, BorderLayout.CENTER);
 		add(createBoutons(), BorderLayout.SOUTH);
 	}

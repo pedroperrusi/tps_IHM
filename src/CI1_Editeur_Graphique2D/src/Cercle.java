@@ -140,10 +140,29 @@ public class Cercle extends Forme2D
 	@Override
 	public Boolean isInside(float x, float y)
 	{
-		float dx = getOrigine().getX() - x;
-		float dy = getOrigine().getY() - y;
+		float dx = getCenter().getX() - x;
+		float dy = getCenter().getY() - y;
 		double distance = Math.sqrt(dx * dx + dy * dy);
 		if (distance < getRadius())
+		{
+			return true;
+		} else
+		{
+			return false;
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#isBorder(CI1_Editeur_Graphique2D.src.Point2D, int)
+	 */
+	@Override
+	public Boolean isBorder(Point2D pt, int borderTolerance)
+	{
+		float dx = getCenter().getX() - pt.getX();
+		float dy = getCenter().getY() - pt.getY();
+		double distance = Math.sqrt(dx * dx + dy * dy);
+		double diffRadiusPoint = getRadius() - distance;
+		if (diffRadiusPoint < borderTolerance)
 		{
 			return true;
 		} else
@@ -176,6 +195,13 @@ public class Cercle extends Forme2D
 					"Radius du cercle" + getFormID() + " invalide");
 		}
 		this.radius = radius;
+	}
+
+	public Point2D getCenter()
+	{
+		int centerX = (int) (getOrigine().getX() + getRadius());
+		int centerY = (int) (getOrigine().getY() + getRadius());
+		return new Point2D(centerX, centerY);
 	}
 
 }
