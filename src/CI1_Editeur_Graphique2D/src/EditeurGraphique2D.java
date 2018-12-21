@@ -6,9 +6,6 @@
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import javax.swing.*;
 
 // TODO: Auto-generated Javadoc

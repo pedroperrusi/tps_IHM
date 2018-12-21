@@ -82,6 +82,28 @@ public class Carre extends Forme2D
 	}
 	
 	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#redimensionnement(int, int)
+	 */
+	@Override
+	public void redimensionnement(int gradientX, int gradientY)
+	{
+		int mediumDeplacement;
+		if(gradientX > 0 && gradientY > 0 ) 
+		{
+			// operation keeps the sign
+			mediumDeplacement = (gradientX + gradientY)/2;
+			this.redimensionnement(this.getCote() + mediumDeplacement);
+		}
+		if(gradientX < 0 && gradientY < 0 ) 
+		{
+			// operation keeps the sign
+			mediumDeplacement = (gradientX + gradientY)/2;
+			this.redimensionnement(this.getCote() + mediumDeplacement);
+		}
+		
+	}
+	
+	/* (non-Javadoc)
 	 * @see CI1_Editeur_Graphique2D.src.Forme2D#computeArea()
 	 */
 	@Override

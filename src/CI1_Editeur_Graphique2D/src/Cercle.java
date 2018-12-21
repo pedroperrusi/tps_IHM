@@ -203,5 +203,26 @@ public class Cercle extends Forme2D
 		int centerY = (int) (getOrigine().getY() + getRadius());
 		return new Point2D(centerX, centerY);
 	}
+	
+	/* (non-Javadoc)
+	 * @see CI1_Editeur_Graphique2D.src.Forme2D#redimensionnement(int)
+	 */
+	@Override
+	public void redimensionnement(int gradientX, int gradientY)
+	{
+		int mediumDeplacement;
+		if(gradientX > 0 && gradientY > 0 ) 
+		{
+			// operation keeps the sign
+			mediumDeplacement = (gradientX + gradientY)/2;
+			this.setRadius(this.getRadius() + mediumDeplacement);
+		}
+		if(gradientX < 0 && gradientY < 0 ) 
+		{
+			// operation keeps the sign
+			mediumDeplacement = (gradientX + gradientY)/2;
+			this.setRadius(this.getRadius() + mediumDeplacement);
+		}	
+	}
 
 }

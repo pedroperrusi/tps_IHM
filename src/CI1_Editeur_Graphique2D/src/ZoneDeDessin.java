@@ -227,6 +227,27 @@ class ZoneDeDessin extends Component
 	}
 	
 	/**
+	 * Resize selected form based on the difference between lastPt and mousePt
+	 *
+	 * @param newOrigin the new origin
+	 * @param lastPt
+	 */
+	public void resizeSelectedForm(Point2D mousePt, Point2D lastPt) 
+	{
+		for(Forme2D forme : listeFormes)
+		{
+			if(this.selectedId == forme.getFormID()) 
+			{
+				// compute distance between mousePt and lastPt
+				int dx = (int)(mousePt.getX() - lastPt.getX());
+				int dy = (int)(mousePt.getY() - lastPt.getY());
+				forme.redimensionnement(dx, dy);
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Any selected.
 	 *
 	 * @return if any form is selected, return true

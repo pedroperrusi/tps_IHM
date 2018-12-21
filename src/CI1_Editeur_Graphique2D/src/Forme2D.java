@@ -163,6 +163,13 @@ public abstract class Forme2D implements Comparable<Forme2D>
 	 */
 	public abstract Boolean isInside(float x, float y);
 	
+	/**
+	 * Redimension a form accordingly to user mouse input.
+	 * Only if both gradient X and gradient Y grow, the size grows.
+	 * The same fits both decreascing
+	 */
+	public abstract void redimensionnement(int gradientX, int gradientY);
+	
 	// 		Get/Set Methods ------------------------------------
 	/**
 	 * Gets the origine.
