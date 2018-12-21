@@ -10,8 +10,6 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.SwingUtilities;
 
-import CI1_Editeur_Graphique2D.src.EditeurGraphique2D.ZoneDeDessin;
-
 class ActionAjouter implements ActionListener
 {
 	ZoneDeDessin dessin;
@@ -167,11 +165,7 @@ class MouseInputs implements MouseListener, MouseMotionListener
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent arg0){}
 	@Override
 	public void mouseExited(MouseEvent arg0){}
 	@Override
