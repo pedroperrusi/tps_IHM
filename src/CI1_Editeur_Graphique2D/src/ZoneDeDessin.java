@@ -223,16 +223,18 @@ class ZoneDeDessin extends Component
 			return false;
 	}
 	
-/**
+/*
  *  Methodes utiles --------------------------.
- *
- * @return the point 2 D
+*/
+ /** Generate random origin position.
+  *  An adjustment on the height and widith is necessary to fit the max taille of the window.
+  * @return the point 2 D
  */
 	
 	Point2D randomPosition()
 	{
-		float x = (float) (Math.random() * windowWidith);
-		float y = (float) (Math.random() * windowHeight);
+		float x = (float) (Math.random() * (windowWidith-maxFormSize));
+		float y = (float) (Math.random() * (windowHeight-maxFormSize));
 		return new Point2D(x, y);
 	}
 
