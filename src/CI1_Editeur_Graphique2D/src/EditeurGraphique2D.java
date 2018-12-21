@@ -1,13 +1,6 @@
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -47,7 +40,7 @@ public class EditeurGraphique2D extends JFrame
 	public ZoneDeDessin zoneDessin;
 	/** Editeur Panel */
 	public JPanel editeurPanel;
-
+	
 	/**
 	 * Instantiates a new editeur graphique 2 D.
 	 *
@@ -103,7 +96,7 @@ public class EditeurGraphique2D extends JFrame
 		// bouton ne peut pas etre focalisee
 		ajouter.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
-		ActionAjouter actionAjout = new ActionAjouter();
+		ActionAjouter actionAjout = new ActionAjouter(zoneDessin);
 		// affectation de cette action au bouton
 		ajouter.addActionListener(actionAjout);
 		// ajout du bouton dans la fenetre
@@ -114,7 +107,7 @@ public class EditeurGraphique2D extends JFrame
 		// bouton ne peut pas etre focalisee
 		supprimer.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
-		ActionSupress actionSupress = new ActionSupress();
+		ActionSupress actionSupress = new ActionSupress(zoneDessin);
 		// affectation de cette action au bouton
 		supprimer.addActionListener(actionSupress);
 		// ajout du bouton dans la fenetre
@@ -125,7 +118,7 @@ public class EditeurGraphique2D extends JFrame
 		// bouton ne peut pas etre focalisee
 		tri.setFocusable(false);
 		// création d’une action pour ajouter dans la liste
-		ActionTriage actionTriage = new ActionTriage();
+		ActionTriage actionTriage = new ActionTriage(zoneDessin);
 		// affectation de cette action au bouton
 		tri.addActionListener(actionTriage);
 		// ajout du bouton dans la fenetre
@@ -147,8 +140,8 @@ public class EditeurGraphique2D extends JFrame
 		group.add(carreButton);
 		group.add(cercleButton);
 		// add actionListener
-		carreButton.addActionListener(new ActionSelectForme());
-		cercleButton.addActionListener(new ActionSelectForme());
+		carreButton.addActionListener(new ActionSelectForme(zoneDessin));
+		cercleButton.addActionListener(new ActionSelectForme(zoneDessin));
 		// add group 
 		panel.add(carreButton);
 		panel.add(cercleButton);
@@ -179,9 +172,9 @@ public class EditeurGraphique2D extends JFrame
 			listeFormes = new ArrayList<Forme2D>();
 			this.setFocusable(true);
 			// listens to keyboard inputs
-			this.addKeyListener(new KeyboardInputs());
+			this.addKeyListener(new KeyboardInputs(this));
 			// listens to mouse clicks
-			MouseInputs mouseInterface = new MouseInputs();
+			MouseInputs mouseInterface = new MouseInputs(this);
 			this.addMouseListener(mouseInterface);
 			this.addMouseMotionListener(mouseInterface);
 		}
@@ -311,134 +304,6 @@ public class EditeurGraphique2D extends JFrame
 				return false;
 		}
 		
-	}
-	
-	class ActionAjouter implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			try
-			{
-				zoneDessin.addRandomDefaultForme();
-			} catch (Exception except)
-			{
-				System.out.println(except.toString());
-			}
-		}
-	}
-
-	class ActionSupress implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			zoneDessin.removeLastForm();
-		}
-
-	}
-	
-	class ActionTriage implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			zoneDessin.sortForme2D();
-		}
-
-	}
-	
-	class ActionSelectForme implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent event)
-		{
-			if(event.getActionCommand() == "Carre") 
-			{
-				zoneDessin.selectedForme = 1;
-			}
-			else if(event.getActionCommand() == "Cercle") 
-			{
-				zoneDessin.selectedForme = 2;
-			}
-		}
-	}
-	
-	class KeyboardInputs implements KeyListener
-	{
-
-		@Override
-		public void keyPressed(KeyEvent event)
-		{
-			char key = event.getKeyChar();
-			// If user press r, draw square
-			if(key == 'r') 
-			{
-				zoneDessin.addRandomSquare();
-			}
-			// If user press c, draw circle
-			if(key == 'c') 
-			{
-				zoneDessin.addRandomCircle();
-			}
-			// If user press d, supress last form2D
-			if(key == 'd') 
-			{
-				zoneDessin.removeLastForm();
-			}
-		}
-		@Override
-		public void keyReleased(KeyEvent event){}
-		@Override
-		public void keyTyped(KeyEvent event){}
-	}
-	
-	class MouseInputs implements MouseListener, MouseMotionListener
-	{
-		boolean focusSelected;
-		@Override
-		public void mouseClicked(MouseEvent event)
-		{
-			// if its a left click and no form is selected, select form2D
-			if(SwingUtilities.isLeftMouseButton(event))
-				this.focusSelected = zoneDessin.selectForm2D(new Point2D(event.getX(), 
-															 		     event.getY()));
-			// if its a right click, descelect any form2D
-			if(SwingUtilities.isRightMouseButton(event))
-				zoneDessin.unselectForm2D();
-		}
-		
-		@Override
-		public void mouseDragged(MouseEvent event)
-		{
-			// If the last form clicked is the selected one
-			if(focusSelected) 
-			{
-				try 
-				{
-					zoneDessin.deplaceSelectedForme(new Point2D(event.getX(), 
-																event.getY()));
-				}catch(Exception exeption) 
-				{
-					System.out.println(exeption);
-				}
-			}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent arg0)
-		{
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void mouseExited(MouseEvent arg0){}
-		@Override
-		public void mousePressed(MouseEvent arg0){}
-		@Override
-		public void mouseReleased(MouseEvent arg0){}
-		@Override
-		public void mouseMoved(MouseEvent arg0){}
 	}
 	
 }
