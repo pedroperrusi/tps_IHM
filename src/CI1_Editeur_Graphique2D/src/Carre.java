@@ -8,7 +8,6 @@ package CI1_Editeur_Graphique2D.src;
 import java.awt.Color;
 import java.awt.Graphics;
 
-// TODO: Auto-generated Javadoc
 /**
  *  Squere geometry object (French).
  */

@@ -137,8 +137,8 @@ class KeyboardInputs implements KeyListener
 
 class MouseInputs implements MouseListener, MouseMotionListener
 {
-	/** Boolean which indicates if a form is being selected or not*/
-	boolean focusSelected;
+	/** Integer if an object has been selected (1), if a border has been selected (2), or none (0)*/
+	int formeSelectionCode;
 	
 	/** Tolerance for region considered as border*/
 	int borderTolerance;
@@ -157,8 +157,8 @@ class MouseInputs implements MouseListener, MouseMotionListener
 	{
 		// if its a left click and no form is selected, select form2D
 		if(SwingUtilities.isLeftMouseButton(event))
-			this.focusSelected = dessin.selectForm2D(new Point2D(event.getX(), event.getY()),
-													 this.borderTolerance);
+			this.formeSelectionCode = dessin.selectForm2D(new Point2D(event.getX(), event.getY()),
+													 	  this.borderTolerance);
 		// if its a right click, descelect any form2D
 		if(SwingUtilities.isRightMouseButton(event))
 			dessin.unselectForm2D();
@@ -167,8 +167,8 @@ class MouseInputs implements MouseListener, MouseMotionListener
 	@Override
 	public void mouseDragged(MouseEvent event)
 	{
-		// If the last form clicked is the selected one
-		if(focusSelected) 
+		// If we click again the selected form, deplace its origin
+		if(formeSelectionCode == 2) 
 		{
 			try 
 			{

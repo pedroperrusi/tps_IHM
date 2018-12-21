@@ -173,11 +173,12 @@ class ZoneDeDessin extends Component
 	 * Select form 2D.
 	 *
 	 * @param point the point
-	 * @return true if the same form has been selected twice.
+	 * @return integer code for click position 
+	 * (0: out of bounds, 1: form selected, 2: second click on the same form, 3: click on the border)
 	 */
-	public boolean selectForm2D(Point2D point, int borderTolerance) 
+	public int selectForm2D(Point2D point, int borderTolerance) 
 	{
-		boolean sameFormSelected = false;
+		int formSelectionCode = 0;
 		// loop through each form
 		for(Forme2D forme : listeFormes)
 		{
@@ -187,22 +188,24 @@ class ZoneDeDessin extends Component
 				// if that same form was previously selected
 				if(this.selectedId == forme.getFormID())
 				{
-					sameFormSelected = true;
-//					if(forme.isBorder(point, borderTolerance)) 
-//					{
-//						
-//					}
+					formSelectionCode = 2;
+					if(forme.isBorder(point, borderTolerance)) 
+					{
+						formSelectionCode = 3;
+					}
 				}
 				else
 				{
 					// if a new form has been selected, save its ID
 					this.selectedId = forme.getFormID();
+					formSelectionCode = 1;
 				}
+				// break Frome2D loop
 				break;
 			}
 		}
 		this.repaint();
-		return sameFormSelected;
+		return formSelectionCode;
 	}
 	
 	/**
