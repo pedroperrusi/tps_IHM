@@ -103,9 +103,9 @@ class ZoneDeDessin extends Component
 	{
 		Point2D origin = randomPosition();
 		Color color = new Color(randomColor(), randomColor(), randomColor());
-		float radius = randomTaille();
+		float diameter = randomTaille();
 		
-		this.listeFormes.add(new Cercle(origin, color, radius));
+		this.listeFormes.add(new Cercle(origin, color, diameter/2));
 		this.repaint();
 	}
 	

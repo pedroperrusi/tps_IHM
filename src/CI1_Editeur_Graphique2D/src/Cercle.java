@@ -115,7 +115,8 @@ public class Cercle extends Forme2D
 			g.setColor(Color.red);
 		else
 			g.setColor(getCouleur());
-		g.fillOval(x, y, radius, radius);
+		// fill oval uses the diameter
+		g.fillOval(x, y, 2*radius, 2*radius);
 	}
 
 	/*
