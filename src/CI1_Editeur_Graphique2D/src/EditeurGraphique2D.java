@@ -1,3 +1,8 @@
+/* Exercises of the course Interfaces Homme Machine.
+ * Université Télécom Physique Strasbourg.
+ *
+ * @author Pedro Henrique SURUAGY PERRUSI
+ */
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.*;
@@ -6,6 +11,7 @@ import java.util.Collections;
 
 import javax.swing.*;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EditeurGraphique2D.
  */
@@ -18,8 +24,10 @@ public class EditeurGraphique2D extends JFrame
 	/** The Constant LARGEUR_PAR_DEFAUT. */
 	private final static int LARGEUR_PAR_DEFAUT = 600;
 	
+	/** The Constant MIN_FORM_TAILLE. */
 	private final static int MIN_FORM_TAILLE = 50;
 	
+	/** The Constant MAX_FORM_TAILLE. */
 	private final static int MAX_FORM_TAILLE = 150;
 
 	/**
@@ -38,7 +46,8 @@ public class EditeurGraphique2D extends JFrame
 
 	/** The zone dessin. */
 	public ZoneDeDessin zoneDessin;
-	/** Editeur Panel */
+	
+	/**  Editeur Panel. */
 	public JPanel editeurPanel;
 	
 	/**
@@ -70,6 +79,11 @@ public class EditeurGraphique2D extends JFrame
 	}
 
 	
+	/**
+	 * Creates the boutons.
+	 *
+	 * @return the j panel
+	 */
 	private JPanel createBoutons()
 	{
 		// créé un panel avec des éléments alignés à gauche

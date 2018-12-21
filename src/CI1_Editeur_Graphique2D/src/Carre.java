@@ -73,7 +73,7 @@ public class Carre extends Forme2D
 	}
 	
 	/**
-	 * Redimensionnement of the square size
+	 * Redimensionnement of the square size.
 	 *
 	 * @param newCote the new cote
 	 */
@@ -136,7 +136,7 @@ public class Carre extends Forme2D
 	}
 
 	/**
-	 * Gets the cote.
+	 * Gets square size.
 	 *
 	 * @return the cote
 	 */
@@ -146,7 +146,7 @@ public class Carre extends Forme2D
 	}
 
 	/**
-	 * Sets the cote.
+	 * Sets the dimension of square size.
 	 *
 	 * @param cote the new cote
 	 * @throws WrongSizeException the wrong size exception

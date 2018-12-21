@@ -79,10 +79,9 @@ public class Cercle extends Forme2D
 	}
 
 	/**
-	 * Redimensionnement of the circle size
+	 * Redimensionnement of the circle size.
 	 *
-	 * @param new
-	 *            Radius will become radius
+	 * @param newRadius the new radius
 	 */
 	public void redimensionnement(float newRadius)
 	{
@@ -165,8 +164,8 @@ public class Cercle extends Forme2D
 	/**
 	 * Sets the radius.
 	 *
-	 * @param radius
-	 *            the new radius
+	 * @param radius            the new radius
+	 * @throws WrongSizeException the wrong size exception
 	 */
 	public void setRadius(float radius) throws WrongSizeException
 	{

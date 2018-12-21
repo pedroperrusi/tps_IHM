@@ -1,3 +1,8 @@
+/* Exercises of the course Interfaces Homme Machine.
+ * Université Télécom Physique Strasbourg.
+ *
+ * @author Pedro Henrique SURUAGY PERRUSI
+ */
 package CI1_Editeur_Graphique2D.src;
 
 import java.awt.Color;
@@ -11,7 +16,8 @@ import java.util.Collections;
  */
 class ZoneDeDessin extends Component
 {
-	/** Selected forme by default (1: carre, 2: cercle)*/
+	
+	/**  Selected forme by default (1: carre, 2: cercle). */
 	public int selectedForme = 1;
 	
 	/** The liste formes. */
@@ -20,11 +26,19 @@ class ZoneDeDessin extends Component
 	/** The selected forme2D id. */
 	private int selectedId;
 	
+	/** The window height. */
 	int windowWidith, windowHeight;
+	
+	/** The max form size. */
 	int minFormSize, maxFormSize;
 	
 	/**
 	 * Instantiates a new zone de dessin.
+	 *
+	 * @param windowWidith the window widith
+	 * @param windowHeight the window height
+	 * @param minFormSize the min form size
+	 * @param maxFormSize the max form size
 	 */
 	public ZoneDeDessin(int windowWidith, int windowHeight, int minFormSize, int maxFormSize)
 	{
@@ -44,6 +58,9 @@ class ZoneDeDessin extends Component
 		this.addMouseMotionListener(mouseInterface);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.Component#paint(java.awt.Graphics)
+	 */
 	public void paint(Graphics g)
 	{
 		for(Forme2D forme : listeFormes)
@@ -55,6 +72,9 @@ class ZoneDeDessin extends Component
 		}
 	}
 	
+	/**
+	 * Adds the random forme with default type.
+	 */
 	public void addRandomDefaultForme() 
 	{
 		if(selectedForme == 1)
@@ -63,6 +83,9 @@ class ZoneDeDessin extends Component
 			this.addRandomCircle();
 	}
 	
+	/**
+	 * Adds the random sized square at a random position.
+	 */
 	public void addRandomSquare() 
 	{
 		Point2D origin = randomPosition();
@@ -73,6 +96,9 @@ class ZoneDeDessin extends Component
 		this.repaint();
 	}
 	
+	/**
+	 * Adds the random sized circle at a random position.
+	 */
 	public void addRandomCircle() 
 	{
 		Point2D origin = randomPosition();
@@ -83,6 +109,9 @@ class ZoneDeDessin extends Component
 		this.repaint();
 	}
 	
+	/**
+	 * Removes the last form.
+	 */
 	public void removeLastForm() 
 	{
 		if (this.listeFormes.size() == 0)
@@ -97,6 +126,9 @@ class ZoneDeDessin extends Component
 		}
 	}
 	
+	/**
+	 * Sort formes 2 D in the drawing zone.
+	 */
 	public void sortForme2D() 
 	{
 		// Sort objects forme2D accordingly to their surface
@@ -124,19 +156,31 @@ class ZoneDeDessin extends Component
 		this.repaint();
 	}
 	
+	/**
+	 * Unselect form 2 D.
+	 */
 	public void unselectForm2D() 
 	{
 		this.selectedId = 0;
 		this.repaint();
 	}
 	
+	/**
+	 * Select form 2D.
+	 *
+	 * @param point the point
+	 * @return true if the same form has been selected twice.
+	 */
 	public boolean selectForm2D(Point2D point) 
 	{
 		boolean sameFormSelected = false;
+		// loop through each form
 		for(Forme2D forme : listeFormes)
 		{
+			// if the point is inside a form
 			if(forme.isInside(point)) 
 			{
+				// if that same form was previously selected
 				if(this.selectedId == forme.getFormID())
 					sameFormSelected = true;
 				else
@@ -148,6 +192,11 @@ class ZoneDeDessin extends Component
 		return sameFormSelected;
 	}
 	
+	/**
+	 * Deplace selected forme.
+	 *
+	 * @param newOrigin the new origin
+	 */
 	public void deplaceSelectedForme(Point2D newOrigin) 
 	{
 		for(Forme2D forme : listeFormes)
@@ -161,6 +210,11 @@ class ZoneDeDessin extends Component
 		this.repaint();
 	}
 	
+	/**
+	 * Any selected.
+	 *
+	 * @return if any form is selected, return true
+	 */
 	public boolean anySelected() 
 	{
 		if(this.selectedId != 0)
@@ -169,7 +223,11 @@ class ZoneDeDessin extends Component
 			return false;
 	}
 	
-/** Methodes utiles --------------------------*/
+/**
+ *  Methodes utiles --------------------------.
+ *
+ * @return the point 2 D
+ */
 	
 	Point2D randomPosition()
 	{
@@ -178,11 +236,21 @@ class ZoneDeDessin extends Component
 		return new Point2D(x, y);
 	}
 
+	/**
+	 * Random color value.
+	 *
+	 * @return the int
+	 */
 	int randomColor()
 	{
 		return (int) (Math.random() * 255);
 	}
 
+	/**
+	 * Random taille.
+	 *
+	 * @return the float
+	 */
 	float randomTaille()
 	{
 		return (float) (minFormSize + Math.random() * (maxFormSize - minFormSize));
